@@ -28,7 +28,7 @@ Using postman:
 ```
 ---
 
-> Use return token in postman's Authentication/Bearer to make API calls.
+> Use return token in postman's Authentication/Bearer to make API calls.  JSON objects should be body/JSON.
 
 **List All Notes By User Token** http://localhost:8000/v1/api/notes
 
