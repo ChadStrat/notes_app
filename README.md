@@ -13,9 +13,8 @@ $ docker-compose build && docker-compose up -d
 $ docker-compose exec app php artisan migrate
 $ docker-compose exec app php artisan passport:install
 ```
-**After running passport, please note user id's and secrets for testing purposes.
 
-Using postman:
+Using postman or similar API tooling:
 
 **Register** 
 
