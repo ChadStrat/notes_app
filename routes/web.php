@@ -22,7 +22,7 @@ $router->post('/register','UsersController@register');
  * preferably there would be a route group for v1/api and nested group for note
  */
 $router->get('v1/api/notes', ['middleware' => 'auth', 'uses' => 'NotesController@list']);
-$router->get('v1/api/note/create', ['middleware' => 'auth', 'uses' => 'NotesController@create']);
-$router->get('v1/api/note/update/{id}', ['middleware' => 'auth', 'uses' => 'NotesController@update']);
-$router->get('v1/api/note/delete/{id}', ['middleware' => 'auth', 'uses' => 'NotesController@delete']);
+$router->post('v1/api/note/create', ['middleware' => 'auth', 'uses' => 'NotesController@create']);
+$router->put('v1/api/note/update/{id}', ['middleware' => 'auth', 'uses' => 'NotesController@update']);
+$router->delete('v1/api/note/delete/{id}', ['middleware' => 'auth', 'uses' => 'NotesController@delete']);
 $router->get('v1/api/note/{id}', ['middleware' => 'auth', 'uses' => 'NotesController@note']);
