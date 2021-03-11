@@ -16,11 +16,9 @@ use Illuminate\Http\Request;
 $router->get('/', function () use ($router) {return $router->app->version();});
 $router->post('/register','UsersController@register');
 
-$router->get('v1/api/note/{id}', ['middleware' => 'auth', function (Request $request, $id) {
-    return '{success: true}';
-}]);
-
+$router->get('v1/api/note/create', ['middleware' => 'auth', 'uses' => 'NotesController@create']);
+$router->get('v1/api/note/update/{id}', ['middleware' => 'auth', 'uses' => 'NotesController@update']);
+$router->get('v1/api/note/delete/{id}', ['middleware' => 'auth', 'uses' => 'NotesController@delete']);
 $router->get('v1/api/note/{id}', ['middleware' => 'auth', 'uses' => 'NotesController@note']);
-// $router->get('v1/api/note/create', ['middleware' => 'auth', 'uses' => 'NotesController@create']);
 // $router->get('v1/api/note/update', ['middleware' => 'auth', 'uses' => 'NotesController@update']);
 // $router->get('v1/api/note/delete', ['middleware' => 'auth', 'uses' => 'NotesController@delete']);

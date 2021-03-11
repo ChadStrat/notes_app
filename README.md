@@ -15,7 +15,7 @@ $ docker-compose exec app php artisan passport:install
 
 Using postman:
 
-1. http://localhost/register
+**Register** http://localhost/register
 
 ```
 {
@@ -25,12 +25,24 @@ Using postman:
 }
 ```
 
-** take use the 'token' value in the return to make API calls
+** take note of the 'token' value in the return to make API calls
 
-2. http://localhost/v1/api/note/create
+**View Note**  http://localhost/v1/api/note/{id}
+
+**Add Note**  http://localhost/v1/api/note/create
 ```
-/** code here **/
+{
+    "title": "testing title 1",
+    "note": "here is a test notes to see"
+}
 ```
 
-### About
-Notes App is built on Laravel/Lumen.
+**Update Note** http://localhost/v1/api/note/update/{id}
+```
+{
+    "title": "New Title",
+    "note": "New note text"
+}
+```
+
+**Delete Note** http://localhost/v1/api/note/delete/{id}
