@@ -2,11 +2,13 @@
 #### Chad Cantrell
 
 ### Setup
-1. create container
-2. create tables
-3. install passport oAuth
+1. download dependencies
+2. create container
+3. create tables
+4. install passport oAuth
 
 ```
+$ composer install
 $ docker-compose build && docker-compose up -d
 $ docker-compose exec app php artisan migrate
 $ docker-compose exec app php artisan passport:install
