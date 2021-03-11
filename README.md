@@ -24,8 +24,9 @@ Using postman:
     "password": "123456"
 }
 ```
+---
 
-** take note of the 'token' value in the return to make API calls
+**List All Notes By User Token** http://localhost:8000/v1/api/notes
 
 **View Note**  http://localhost/v1/api/note/{id}
 

@@ -11,15 +11,38 @@ use App\Models\Note;
 class NotesController extends Controller
 {
     /**
-     * Get the authenticated User
+     * List all users by the given Auth token
      *
-     * @return [json] user object
+     * @param Request $request
+     * @return void
+     */
+    public function list(Request $request)
+    {
+        return json_encode(Auth::user()->notes);
+    }
+
+    /**
+     * Find a note by the given id if owned
+     *
+     * @param Request $request
+     * @param [type] $id
+     * @return void
      */
     public function note(Request $request, $id)
     {
-        return json_encode(Note::where('id', $id)->first());
+        $note = $this->getNote($request,$id);
+        if(!$note){
+            return "{response: 'You do not have permissions to view this note.', succss: false}";
+        }
+        return json_encode($note);
     }
 
+    /**
+     * Create a new note (associate to user auth in model)
+     *
+     * @param Request $request
+     * @return void
+     */
     public function create(Request $request)
     {
         $rules =[ 
@@ -39,23 +62,70 @@ class NotesController extends Controller
         return json_encode($response);
     }
 
+    /**
+     * Update a note by given id if owned
+     *
+     * @param Request $request
+     * @param [type] $id
+     * @return void
+     */
     public function update(Request $request, $id)
     {
+        $note = $this->getNote($request,$id);
+        if(!$note){
+            return "{response: 'You do not have permissions to update this note.', succss: false}";
+        }
         try {
-            $note = Note::where('id', $id)->update($request->all());
-            return json_encode($note);
+            $rules =[ 
+                'title' => 'max:100',
+                'note' => 'max:1000',
+            ];
+
+            $response = array('response' => '', 'success'=>false);
+
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                $response['response'] = $validator->messages();
+            }else{
+                $note = Note::where('id', $id)->where('user_id', $request->user()->id)->update($request->all());
+                return response()->json(['response' => 'Note successfully updated','success'=>true], 201);
+            }
+            return json_encode($response);
         } catch(Exception $e) {
             return json_encode($e);
         }
     }
 
+    /**
+     * Delete a note by given id if owned.
+     *
+     * @param Request $request
+     * @param [type] $id
+     * @return void
+     */
     public function delete(Request $request, $id)
     {
+        $note = $this->getNote($request,$id);
+        if(!$note){
+            return "{response: 'You do not have permissions to delete this note.', succss: false}";
+        }
         try {
             Note::where('id', $id)->delete();
-            return "{response: '', success: true}";
+            return response()->json(['response' => 'Note successfully deleted','success'=>true], 201);
         } catch(Exception $e) {
             return json_encode($e);
         }
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $request
+     * @param [type] $id
+     * @return void
+     */
+    public function getNote($request,$id)
+    {
+       return Note::where('id', $id)->where('user_id', $request->user()->id)->first();
     }
 }
