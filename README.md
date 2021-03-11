@@ -17,7 +17,9 @@ $ docker-compose exec app php artisan passport:install
 
 Using postman:
 
-**Register** http://localhost/register
+**Register** 
+
+POST/ http://localhost/register
 
 ```
 {
@@ -31,12 +33,15 @@ Using postman:
 > Use return token in postman's Authentication/Bearer to make API calls.  JSON objects should be body/JSON.
 
 **List All Notes By User Token** 
+
 GET/ http://localhost:8000/v1/api/notes
 
 **View Note**  
+
 GET/ http://localhost/v1/api/note/{id}
 
 **Add Note**  
+
 POST/ http://localhost/v1/api/note/create
 ```
 {
@@ -46,6 +51,7 @@ POST/ http://localhost/v1/api/note/create
 ```
 
 **Update Note** 
+
 PUT/ http://localhost/v1/api/note/update/{id}
 
 ```
@@ -56,4 +62,5 @@ PUT/ http://localhost/v1/api/note/update/{id}
 ```
 
 **Delete Note** 
+
 DELETE/ http://localhost/v1/api/note/delete/{id}
