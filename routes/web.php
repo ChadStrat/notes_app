@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Http\Request;
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
@@ -12,7 +13,14 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
+$router->get('/', function () use ($router) {return $router->app->version();});
+$router->post('/register','UsersController@register');
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+$router->get('v1/api/note/{id}', ['middleware' => 'auth', function (Request $request, $id) {
+    return '{success: true}';
+}]);
+
+$router->get('v1/api/note/{id}', ['middleware' => 'auth', 'uses' => 'NotesController@note']);
+// $router->get('v1/api/note/create', ['middleware' => 'auth', 'uses' => 'NotesController@create']);
+// $router->get('v1/api/note/update', ['middleware' => 'auth', 'uses' => 'NotesController@update']);
+// $router->get('v1/api/note/delete', ['middleware' => 'auth', 'uses' => 'NotesController@delete']);
