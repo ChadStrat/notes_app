@@ -30,11 +30,14 @@ Using postman:
 
 > Use return token in postman's Authentication/Bearer to make API calls.  JSON objects should be body/JSON.
 
-**List All Notes By User Token** http://localhost:8000/v1/api/notes
+**List All Notes By User Token** 
+GET/ http://localhost:8000/v1/api/notes
 
-**View Note**  http://localhost/v1/api/note/{id}
+**View Note**  
+GET/ http://localhost/v1/api/note/{id}
 
-**Add Note**  http://localhost/v1/api/note/create
+**Add Note**  
+POST/ http://localhost/v1/api/note/create
 ```
 {
     "title": "testing title 1",
@@ -42,7 +45,9 @@ Using postman:
 }
 ```
 
-**Update Note** http://localhost/v1/api/note/update/{id}
+**Update Note** 
+PUT/ http://localhost/v1/api/note/update/{id}
+
 ```
 {
     "title": "New Title",
@@ -50,4 +55,5 @@ Using postman:
 }
 ```
 
-**Delete Note** http://localhost/v1/api/note/delete/{id}
+**Delete Note** 
+DELETE/ http://localhost/v1/api/note/delete/{id}
